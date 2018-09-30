@@ -52,3 +52,20 @@ Write a short paragraph about this dataset
 ------------------------------------------
 
 The original dataset contains variables related to subway station name, location and each entrance and exit for each subway station in NYC. I import the dataset, convert column names to lower snake case, retain column including "line, station, name, station latitude/longitude, routes served, entry, vending, entrance type, and ADA compliance" and convert the entry variable from character to a logical variable.The dimension of the dataset is 1868\*19. It is a tidy dataset.
+
+Answer questions using these data
+---------------------------------
+
+``` r
+nyc_stat = subset(nyc_sub, select = c(station_name, route1: route11))
+n_dist_stat = n_distinct(nyc_stat)
+
+nyc_stat_ada = subset(nyc_sub, ada == TRUE, select = c(station_name, route1:route11)) 
+n_stat_ada = n_distinct(nyc_stat_ada)
+
+nyc_stat_vend = subset(nyc_sub, vending == "YES", select = c(station_name, route1:route11))
+n_stat_vend = n_distinct(nyc_stat_vend)
+prop_stat_vend = (n_dist_stat-n_stat_vend)/n_dist_stat
+```
+
+There are 456 distinct stations. Among them, 79 are ADA compliant. The proportion of station entrances / exits without vending allow entrance is 0.0065789.
