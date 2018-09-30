@@ -4,3 +4,4 @@ This is data science homework 2.
 
 Problem 1:
   1.Read and clean the data
+  2.introduce this dataset 

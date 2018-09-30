@@ -47,3 +47,8 @@ nyc_sub  = read_csv(file = "./data/NYC_Transit_Subway_Entrance_And_Exit_Data.csv
     ## )
 
     ## See spec(...) for full column specifications.
+
+Write a short paragraph about this dataset
+------------------------------------------
+
+The original dataset contains variables related to subway station name, location and each entrance and exit for each subway station in NYC. I import the dataset, convert column names to lower snake case, retain column including "line, station, name, station latitude/longitude, routes served, entry, vending, entrance type, and ADA compliance" and convert the entry variable from character to a logical variable.The dimension of the dataset is 1868\*19. It is a tidy dataset.
