@@ -1,0 +1,27 @@
+---
+title: "p8105_hw2_hq2163_hanbo"
+author: "Hanbo Qiu"
+date: "September 30, 2018"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+##Import and clean NYC Transit csv files
+Import my first csv (NYC_Transit_Subway_Entrance_And_Exit_Data.csv) and clean it.
+
+```{r}
+nyc_sub  = read_csv(file = "./data/NYC_Transit_Subway_Entrance_And_Exit_Data.csv") %>% 
+  janitor::clean_names() %>% 
+  select(line:entry, vending, ada) %>% 
+  mutate(entry = recode(entry, "YES" = TRUE, "NO" = FALSE)
+  )
+```
+
+
