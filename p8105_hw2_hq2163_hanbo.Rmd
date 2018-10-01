@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
+#Problem 1
 ##Import and clean NYC Transit csv files
 Import my first csv (NYC_Transit_Subway_Entrance_And_Exit_Data.csv) and clean it.
 
@@ -59,3 +60,14 @@ n_a_stat_ada = nrow(a_stat_ada)
 ```
 
 There are `r n_dist_stat_a` distinct stations serve the A train. Of the stations that serve the A train, ADA compliant is `r n_a_stat_ada`.
+
+#Problem 2
+##Read and clean the Mr. Trash Wheel sheet
+
+```{r}
+library(readxl)
+trash_wheel = read_excel("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx", 
+                         sheet = "Mr. Trash Wheel", 
+                         range = cell_cols("A:N"))
+```
+

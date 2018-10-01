@@ -18,6 +18,9 @@ library(tidyverse)
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
 
+Problem 1
+=========
+
 Import and clean NYC Transit csv files
 --------------------------------------
 
@@ -87,3 +90,16 @@ n_a_stat_ada = nrow(a_stat_ada)
 ```
 
 There are 60 distinct stations serve the A train. Of the stations that serve the A train, ADA compliant is 17.
+
+Problem 2
+=========
+
+Read and clean the Mr. Trash Wheel sheet
+----------------------------------------
+
+``` r
+library(readxl)
+trash_wheel = read_excel("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx", 
+                         sheet = "Mr. Trash Wheel", 
+                         range = cell_cols("A:N"))
+```
