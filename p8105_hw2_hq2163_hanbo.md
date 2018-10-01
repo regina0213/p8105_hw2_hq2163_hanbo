@@ -51,21 +51,39 @@ nyc_sub  = read_csv(file = "./data/NYC_Transit_Subway_Entrance_And_Exit_Data.csv
 Write a short paragraph about this dataset
 ------------------------------------------
 
-The original dataset contains variables related to subway station name, location and each entrance and exit for each subway station in NYC. I import the dataset, convert column names to lower snake case, retain column including "line, station, name, station latitude/longitude, routes served, entry, vending, entrance type, and ADA compliance" and convert the entry variable from character to a logical variable.The dimension of the dataset is 1868\*19. It is a tidy dataset.
+The original dataset contains variables related to subway station name, location and each entrance and exit for each subway station in NYC. I import the dataset, convert column names to lower snake case, retain column including "line, station, name, station latitude/longitude, routes served, entry, vending, entrance type, and ADA compliance" and convert the entry variable from character to a logical variable.The dimension of the dataset is 1868\*19. The data provided includes columns route1 to route10, which list all routes served by a station entrance/exit. This isn't a "tidy" format, and should be restructured accordingly.
 
 Answer questions using these data
 ---------------------------------
 
 ``` r
-nyc_stat = subset(nyc_sub, select = c(station_name, route1: route11))
-n_dist_stat = n_distinct(nyc_stat)
+dist_stat = distinct(nyc_sub, line, station_name)
+n_dist_stat = nrow(dist_stat)
 
-nyc_stat_ada = subset(nyc_sub, ada == TRUE, select = c(station_name, route1:route11)) 
-n_stat_ada = n_distinct(nyc_stat_ada)
+dist_stat_ada = subset(nyc_sub, ada == TRUE, select = c(station_name, line))
+n_stat_ada = n_distinct(dist_stat_ada)
 
-nyc_stat_vend = subset(nyc_sub, vending == "YES", select = c(station_name, route1:route11))
-n_stat_vend = n_distinct(nyc_stat_vend)
+dist_stat_vend = subset(nyc_sub, vending == "YES", select = c(line, station_name))
+n_stat_vend = n_distinct(dist_stat_vend)
 prop_stat_vend = (n_dist_stat-n_stat_vend)/n_dist_stat
 ```
 
-There are 456 distinct stations. Among them, 79 are ADA compliant. The proportion of station entrances / exits without vending allow entrance is 0.0065789.
+There are 465 distinct stations. Among them, 84 are ADA compliant. The proportion of station entrances / exits without vending allow entrance is 0.0064516.
+
+Reformat data
+-------------
+
+Reformat data using route number and route name. Caculate distinct stations serve the A train and number of distinct stations which serve A train is ADA compliant.
+
+``` r
+nyc_route = gather(nyc_sub, key = route_number, value = route_name, route1: route11)
+stat_a = subset(nyc_route,route_name == "A")
+dist_stat_a = distinct(stat_a, line, station_name)
+n_dist_stat_a = nrow(dist_stat_a)
+
+stat_a_ada = subset(stat_a, ada == TRUE)
+a_stat_ada = distinct(stat_a_ada, line, station_name)
+n_a_stat_ada = nrow(a_stat_ada)
+```
+
+There are 60 distinct stations serve the A train. Of the stations that serve the A train, ADA compliant is 17.

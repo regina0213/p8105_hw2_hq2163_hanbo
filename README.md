@@ -6,3 +6,4 @@ Problem 1:
   1.Read and clean the data
   2.introduce this dataset 
   3.Do some calculations
+  4.Reformat data
