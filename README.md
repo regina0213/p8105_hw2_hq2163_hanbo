@@ -10,3 +10,4 @@ Problem 1:
   
 Problem 2:
   1.Read and clean the Mr. Trash Wheel sheet
+  2.Read and clean precipitation data

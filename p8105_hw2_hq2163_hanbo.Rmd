@@ -68,6 +68,43 @@ There are `r n_dist_stat_a` distinct stations serve the A train. Of the stations
 library(readxl)
 trash_wheel = read_excel("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx", 
                          sheet = "Mr. Trash Wheel", 
-                         range = cell_cols("A:N"))
+                         range = cell_cols("A:N")) %>% 
+   janitor::clean_names() %>% 
+   filter(!is.na(dumpster)) %>% 
+   mutate(sports_balls = as.integer(round(sports_balls, digits = 0)))
 ```
+##Read and clean precipitation data
 
+```{r}
+precip_2017 = read_excel("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx",
+                         sheet = "2017 Precipitation",
+                         skip = 1,
+                         n_max = 12) %>% 
+  janitor::clean_names() %>%
+  mutate(year = 2017) %>%
+  filter(!is.na(total)) %>% 
+  select(year, everything()) 
+
+precip_2016 = read_excel("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx",
+                         sheet = "2016 Precipitation",
+                         skip = 1,
+                         n_max = 12) %>% 
+  janitor::clean_names() %>%
+  mutate(year = 2016) %>%
+  filter(!is.na(total)) %>% 
+  select(year, everything()) 
+
+precip_16_17 = bind_rows(precip_2017,precip_2016) %>% 
+  mutate(month = factor(month, levels = 1:12, labels = month.name),
+         month = as.character(month)
+         )
+
+n_trash_wheel = nrow(trash_wheel)
+n_precip_16_17 = nrow(precip_16_17)
+
+total_precip_2017 = sum(precip_2017$total)
+
+ball_2016 = subset(trash_wheel, year == 2016, select = sports_balls)
+median_ball = median(ball_2016$sports_balls)
+```
+The number of observations in Trash Wheel sheet is `r n_trash_wheel` and the number of observations in precipitation data is `r n_precip_16_17`. Some key variables are year, month because they are the connection between two database. The total precipitation in 2017 is `r total_precip_2017`. The median number of sports balls in a dumpster in 2016 is `r median_ball`.
