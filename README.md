@@ -15,4 +15,4 @@ Problem 2:
 Problem 3:
   1.install.packages("devtools")
   2.load the data from the p8105.datasets package and use code "data(package = "p8105.datasets")" to find the data brfss_smart2010  and use it.
-  3.create an overall_heal dataset and focus on the “Overall Health” topic. Tidy the dataset and add a variables "prop_over_good" which indicate the proportion of subjects with “Excellent” or “Very Good”.
+  3.make calculations and drow plots.
