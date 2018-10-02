@@ -180,7 +180,7 @@ resp_NYC_QC = subset(overall_heal, locationdesc %in% c(str_c("NY - ", c("New Yor
 #Draw the scatterplot.
 ggplot(resp_NYC_QC, aes(x = year, y = excellent, colour = locationdesc)) + 
   geom_point() +
-  labs(title = "“Excellent” response values in New York County and Queens County (2002-2010)", 
+  labs(title = "“Excellent” response in New York and Queens Counties (2002-2010)", 
        x = "Year", y = "“Excellent” response value") +
   theme_bw()
 ```
