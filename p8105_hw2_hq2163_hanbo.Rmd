@@ -68,7 +68,8 @@ There are `r n_dist_stat_a` distinct stations serve the A train. Of the stations
 ```{r}
 #Read and clean the Mr. Trash Wheel sheet. Round the sports_balls to integer.
 library(readxl)
-trash_wheel = read_excel("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx", 
+data_dir = "./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx"
+trash_wheel = read_excel(data_dir, 
                          sheet = "Mr. Trash Wheel", 
                          range = cell_cols("A:N")) %>% 
    janitor::clean_names() %>% 
@@ -78,7 +79,7 @@ trash_wheel = read_excel("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx",
 
 ```{r}
 #Read and clean 2017 precipitation data.
-precip_2017 = read_excel("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx",
+precip_2017 = read_excel(data_dir,
                          sheet = "2017 Precipitation",
                          skip = 1,
                          n_max = 12) %>% 
@@ -88,7 +89,7 @@ precip_2017 = read_excel("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx",
   select(year, everything()) 
 
 #Read and clean 2016 precipitation data.
-precip_2016 = read_excel("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx",
+precip_2016 = read_excel(data_dir,
                          sheet = "2016 Precipitation",
                          skip = 1,
                          n_max = 12) %>% 

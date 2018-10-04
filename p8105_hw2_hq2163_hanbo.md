@@ -79,7 +79,8 @@ Problem 2
 ``` r
 #Read and clean the Mr. Trash Wheel sheet. Round the sports_balls to integer.
 library(readxl)
-trash_wheel = read_excel("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx", 
+data_dir = "./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx"
+trash_wheel = read_excel(data_dir, 
                          sheet = "Mr. Trash Wheel", 
                          range = cell_cols("A:N")) %>% 
    janitor::clean_names() %>% 
@@ -89,7 +90,7 @@ trash_wheel = read_excel("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx",
 
 ``` r
 #Read and clean 2017 precipitation data.
-precip_2017 = read_excel("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx",
+precip_2017 = read_excel(data_dir,
                          sheet = "2017 Precipitation",
                          skip = 1,
                          n_max = 12) %>% 
@@ -99,7 +100,7 @@ precip_2017 = read_excel("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx",
   select(year, everything()) 
 
 #Read and clean 2016 precipitation data.
-precip_2016 = read_excel("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx",
+precip_2016 = read_excel(data_dir,
                          sheet = "2016 Precipitation",
                          skip = 1,
                          n_max = 12) %>% 
@@ -127,7 +128,7 @@ ball_2016 = subset(trash_wheel, year == 2016, select = sports_balls)
 median_ball = median(ball_2016$sports_balls)
 ```
 
-The number of observations in Trash Wheel sheet is 216 and the number of observations in precipitation data is 20. Some key variables are year, month because they are the connection between two database. The total precipitation in 2017 is 29.93. The median number of sports balls in a dumpster in 2016 is 26.
+The number of observations in Trash Wheel sheet is 285 and the number of observations in precipitation data is 24. Some key variables are year, month because they are the connection between two database. The total precipitation in 2017 is 32.93. The median number of sports balls in a dumpster in 2016 is 26.
 
 Problem 3
 ---------
